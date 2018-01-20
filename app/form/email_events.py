@@ -7,6 +7,7 @@ from app.exceptions import ValidationError
 from app.form import form
 from app.models.email_event import EmailEvent
 from app.models.email_event_form import EmailEventForm
+from app.models.email_group import EmailGroup
 from app.utils import validate_timestamp
 
 
@@ -17,13 +18,14 @@ from app.utils import validate_timestamp
 @form.route('/save_emails', methods=['GET', 'POST'])
 def form_save_emails():
     emailEvent_form = EmailEventForm()
+    initial_group_ids(emailEvent_form)
     if emailEvent_form.validate_on_submit():
         # validate input timestamp
         try:
             utc_timestamp = validate_timestamp(emailEvent_form.timestamp.data, emailEvent_form.timezone.data)
         except ValidationError, e_valid:
-            flash(e_valid.message, 'error')
-            return redirect(url_for('api.form_save_emails'))
+            flash(e_valid.message, 'alert-danger')
+            return redirect(url_for('form.form_save_emails'))
 
         # validate other data
         emailEvent = EmailEvent(
@@ -36,11 +38,16 @@ def form_save_emails():
         try:
             emailEvent.save()
         except ValidationError, e_valid:
-            flash(e_valid.message, 'error')
+            flash(e_valid.message, 'alert-danger')
         except Exception, e:
-            flash(e.message, 'error')
+            flash(e.message, 'alert-danger')
         else:
-            flash('Submit success!')
+            flash('Submit success!', 'alert-success')
         finally:
             return redirect(url_for('form.form_save_emails'))
     return render_template('save_emails.html', form=emailEvent_form)
+
+
+def initial_group_ids(emailEvent_form):
+    email_groups = EmailGroup.query.all()
+    emailEvent_form.email_group_id.choices = [(eg.id, eg.group_name) for eg in email_groups]
