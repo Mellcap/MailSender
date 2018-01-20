@@ -19,15 +19,16 @@ def form_email_groups():
         # validate input data
         emailGroup = EmailGroup(group_name=emailGroup_form.group_name.data)
         try:
+            emailGroup.validate()
             # add batch email_address
             emailGroup.add_batch_emailAddresses_from_string(emailGroup_form.email_addresses.data)
             emailGroup.save()
         except ValidationError, e_valid:
-            flash(e_valid.message, 'error')
+            flash(e_valid.message, 'alert-danger')
         except Exception, e:
-            flash(e.message, 'error')
+            flash(e.message, 'alert-danger')
         else:
-            flash('Submit success! Email Group Id: %s' % emailGroup.id)
+            flash('Submit success!', 'alert-success')
         finally:
             return redirect(url_for('form.form_email_groups'))
     return render_template('save_email_groups.html', form=emailGroup_form)

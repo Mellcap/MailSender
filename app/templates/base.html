@@ -17,8 +17,8 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="{{ url_for('form.form_save_emails') }}">Home</a></li>
-                <li><a href="#">Email Groups</a></li>
-                <li><a href="#">Email Events</a></li>
+                <li><a href="{{ url_for('form.form_email_groups') }}">Email Groups</a></li>
+                <li><a href="{{ url_for('form.form_save_emails') }}">Email Events</a></li>
             </ul>
         </div>
     </div>
@@ -27,6 +27,13 @@
 {% endblock %}
 
 {% block content %}
+    <!--Flash Message-->
+    {% for category, message in get_flashed_messages(with_categories=true) %}
+        <div class="alert {{ category }} center-block" style="width: 45%">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ message }}
+        </div>
+    {% endfor %}
 {% endblock %}
 
 

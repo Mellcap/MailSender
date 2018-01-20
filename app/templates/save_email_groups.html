@@ -5,17 +5,23 @@
 
 <div class="container">
     <div class="page-header">
-        <h1>Hello, Chinab!</h1>
-        <h4>Here is a online demo.</h4>
+        <h1 align="center">Save your email groups</h1>
     </div>
-    {% for message in get_flashed_messages() %}
-        <div class="alert alert-warning">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            {{ message }}
-        </div>
-    {% endfor %}
+    <br />
+    <br />
 
+    {{ super() }}
 
-    {{ wtf.quick_form(form) }}
+    <!--Email Groups Form-->
+    <form class="form center-block" style="width: 45%" method="post" role="form">
+        {{ form.hidden_tag() }}
+        {{ wtf.form_errors(form, hiddens="only") }}
+
+        {{ wtf.form_field(form.group_name, placeholder='Add email group name, must be unique.') }}
+        {{ wtf.form_field(form.email_addresses, style="height:300px",
+            placeholder='You can enter multiple email addresses at once, separated by commas') }}
+    </br>
+        {{ wtf.form_field(form.submit, class='btn btn-block btn-lg btn-primary') }}
+    </form>
 </div>
 {% endblock %}

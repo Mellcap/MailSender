@@ -18,6 +18,7 @@ from app.utils import validate_timestamp
 @form.route('/save_emails', methods=['GET', 'POST'])
 def form_save_emails():
     emailEvent_form = EmailEventForm()
+    # dynamic set selected group_ids
     initial_group_ids(emailEvent_form)
     if emailEvent_form.validate_on_submit():
         # validate input timestamp
@@ -49,5 +50,6 @@ def form_save_emails():
 
 
 def initial_group_ids(emailEvent_form):
+    '''dynamic set selected group_ids'''
     email_groups = EmailGroup.query.all()
     emailEvent_form.email_group_id.choices = [(eg.id, eg.group_name) for eg in email_groups]
