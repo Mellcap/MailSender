@@ -38,6 +38,35 @@ manager.add_command("shell", Shell(make_context=make_shell_context))
 manager.add_command('db', MigrateCommand)
 
 
+# ==================================
+# add celery worker & beat command
+# ==================================
+
+class CeleryWorker(Command):
+    """Starts the celery worker."""
+    name = 'celery_worker'
+    capture_all_args = True
+
+    def run(self, argv):
+        ret = subprocess.call(
+            ['celery', 'worker', '-A', 'app.celery'] + argv)
+        sys.exit(ret)
+
+manager.add_command("celery_worker", CeleryWorker())
+
+class CeleryBeat(Command):
+    """Starts the celery beat."""
+    name = 'celery_beat'
+    capture_all_args = True
+
+    def run(self, argv):
+        ret = subprocess.call(
+            ['celery', 'beat', '-A', 'app.celery'] + argv)
+        sys.exit(ret)
+
+manager.add_command("celery_beat", CeleryWorker())
+
+
 # ======================
 # add unittest command
 # ======================
