@@ -40,9 +40,9 @@ def create_app(config_name):
     admin.init_app(app)
 
     # register blueprint
-    # from app.api import api as api_blueprint
-    # from app.form import form as form_blueprint
-    # app.register_blueprint(api_blueprint)
-    # app.register_blueprint(form_blueprint, url_prefix='/forms')
+    from app.api import api as api_blueprint
+    from app.form import form as form_blueprint
+    app.register_blueprint(api_blueprint)
+    app.register_blueprint(form_blueprint, url_prefix='/forms')
 
     return app
