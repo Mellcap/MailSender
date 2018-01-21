@@ -32,3 +32,9 @@ def form_email_groups():
         finally:
             return redirect(url_for('form.form_email_groups'))
     return render_template('save_email_groups.html', form=emailGroup_form)
+
+
+@form.route('/get_email_groups', methods=['GET', 'POST'])
+def form_get_email_groups():
+    emailGroups = EmailGroup.query.all()
+    return render_template('email_groups.html', emailGroups=emailGroups)
