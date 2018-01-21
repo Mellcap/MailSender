@@ -12,22 +12,29 @@ from app.models.email_group_form import EmailGroupForm
 # form
 # ======
 
-@form.route('/email_groups', methods=['GET', 'POST'])
+@form.route('/save_email_groups', methods=['GET', 'POST'])
 def form_email_groups():
     emailGroup_form = EmailGroupForm()
     if emailGroup_form.validate_on_submit():
         # validate input data
         emailGroup = EmailGroup(group_name=emailGroup_form.group_name.data)
         try:
+            emailGroup.validate()
             # add batch email_address
             emailGroup.add_batch_emailAddresses_from_string(emailGroup_form.email_addresses.data)
             emailGroup.save()
         except ValidationError, e_valid:
-            flash(e_valid.message, 'error')
+            flash(e_valid.message, 'alert-danger')
         except Exception, e:
-            flash(e.message, 'error')
+            flash(e.message, 'alert-danger')
         else:
-            flash('Submit success! Email Group Id: %s' % emailGroup.id)
+            flash('Submit success!', 'alert-success')
         finally:
             return redirect(url_for('form.form_email_groups'))
     return render_template('save_email_groups.html', form=emailGroup_form)
+
+
+@form.route('/get_email_groups', methods=['GET', 'POST'])
+def form_get_email_groups():
+    emailGroups = EmailGroup.query.all()
+    return render_template('email_groups.html', emailGroups=emailGroups)

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+
+<div class="container">
+    <div class="page-header">
+        <h1 align="center">Hello Chinab Chugh</h1>
+        <h1 align="center">Here is an online demo of MailSender</h1>
+    </div>
+    <br />
+
+    <div class="card center-block">
+        <!--Model Definition-->
+        <h2>Model Definition</h2>
+        <h4><li>Email Group   - Store a particular group of recipients.</li></h4>
+        <h4><li>Email Address - Store a particular email address.(Relation: many-to-many Email Group.)</li></h4>
+        <h4><li>Email Event   - Store a email event, in order to send a email to a particular email group.</li></h4>
+
+        <!--Usage-->
+        <h2>Have a try</h2>
+        <h4><li>Create a <a href="{{ url_for('form.form_email_groups') }}">Email Group</a></li></h4>
+        <h4><li>Create a <a href="{{ url_for('form.form_save_emails') }}">Email Event</a></li></h4>
+        <h4><li>Wait for you email</li></h4>
+    </div>
+
+</br>
+</br>
+</br>
+</div>
+
+{% endblock %}

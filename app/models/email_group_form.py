@@ -9,5 +9,5 @@ from wtforms.validators import InputRequired, Length
 class EmailGroupForm(FlaskForm):
     group_name = StringField('Email Group Name', validators=[InputRequired(), Length(max=64)])
     email_addresses = TextAreaField(
-        'Email Addresses(You can input multi emails, divided them by comma.)', validators=[InputRequired()])
+        'Email Addresses', validators=[InputRequired()])
     submit = SubmitField('Submit')

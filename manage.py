@@ -4,6 +4,7 @@
 import os
 import sys
 import subprocess
+from flask import render_template
 
 from app import create_app, db, admin
 from app.models.email_event import EmailEvent
@@ -77,6 +78,11 @@ def test():
     import unittest
     tests = unittest.TestLoader().discover('tests')
     unittest.TextTestRunner(verbosity=2).run(tests)
+
+# home page
+@app.route('/', methods=['GET'])
+def home():
+    return render_template('home.html')
 
 
 if __name__ == '__main__':
