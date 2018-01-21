@@ -26,18 +26,18 @@ In order to have a better experience, I build an **[Online Demo](http://www.wenz
 #### Structures
 ```
 ├── app
-│   ├── __init__.py		  		 ===>   Application factory
+│   ├── __init__.py		 ===>   Application factory
 │   ├── api                             --------------------
 │   │   ├── __init__.py
-│   │   ├── email_events.py		 ===>   API handle requests
+│   │   ├── email_events.py	 ===>   API handle requests
 │   │   ├── email_groups.py
 │   │   └── errors.py                   --------------------
-│   ├── email.py					 ===>   Send email (celery)
-│   ├── exceptions.py				 ===>   Handle exceptions
-│   ├── form								 -------------------
+│   ├── email.py		 ===>   Send email (celery)
+│   ├── exceptions.py		 ===>   Handle exceptions
+│   ├── form				-------------------
 │   │   ├── __init__.py
-│   │   ├── email_events.py	     ===>   Forms
-│   │   └── email_groups.py				 -------------------
+│   │   ├── email_events.py	 ===>   Forms
+│   │   └── email_groups.py		-------------------
 │   ├── models
 │   │   ├── __init__.py
 │   │   ├── email_event.py
@@ -45,7 +45,7 @@ In order to have a better experience, I build an **[Online Demo](http://www.wenz
 │   │   ├── email_group.py
 │   │   ├── email_group_form.py          -------------------
 │   ├── schedules.py              ===>   Celery Schedules
-│   ├── templates 						  -------------------
+│   ├── templates 			 -------------------
 │   │   ├── base.html
 │   │   ├── email_events.html
 │   │   ├── email_groups.html     ===>   Templates
@@ -53,26 +53,26 @@ In order to have a better experience, I build an **[Online Demo](http://www.wenz
 │   │   ├── save_email_groups.html
 │   │   └── save_emails.html             -------------------
 │   ├── utils.py                  ===>   Utils
-├── celeryconfig.py				  ===>   Celery Schedule Config
-├── config.py						  ===>   App config(Served for many environments)
+├── celeryconfig.py		  ===>   Celery Schedule Config
+├── config.py			  ===>   App config(Served for many environments)
 ├── docker-compose.yml
-├── manage.py						  ===>   Manage file
-├── migrations						  		 -------------------
+├── manage.py			  ===>   Manage file
+├── migrations				 -------------------
 │   ├── README
 │   ├── alembic.ini
-│   ├── env.py					     ===>   Database Migration
+│   ├── env.py			  ===>   Database Migration
 │   ├── script.py.mako
 │   └── versions
-│       ├── f2512412c77a_.py			 	 -------------------
+│       ├── f2512412c77a_.py		 -------------------
 ├── requirements.txt
 ├── setup.py
-├── tests									 -------------------
+├── tests				 -------------------
 │   ├── __init__.py
 │   ├── test_basics.py
-│   ├── test_save_email.py		 ===>   Unittests
+│   ├── test_save_email.py	  ===>   Unittests
 │   ├── test_send_email.py
-│   ├── utils.py							 -------------------
-└── wait-for-it.sh				 ===>   A script that let server wait database setup
+│   ├── utils.py			 -------------------
+└── wait-for-it.sh		  ===>   A script that let server wait database setup
 ```
 
 It is worth to say that the `create_app` function at MailSender/app/__init__/py is an application factory, which takes config_name as an argument the name of a configuration to use for the application.
