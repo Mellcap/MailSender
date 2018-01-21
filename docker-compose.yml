@@ -1,0 +1,55 @@
+version: '2'
+
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: jublia
+      MYSQL_DATABASE: jublia_test
+    ports:
+      - "3306:3306"
+    networks:
+      - dev-network
+  server:
+    depends_on:
+      - db
+    image: mellcap/mailsender:latest
+    ports:
+      - "5000:5000"
+    environment:
+      JUBLIA_CONFIG: production
+      DATABASE_URL: mysql://root:jublia@db:3306/jublia_test
+      # Set your mail config
+      MAIL_SERVER: your_email_server
+      MAIL_PORT: your_email_port
+      MAIL_USERNAME: your_email_username
+      MAIL_PASSWORD: your_email_password
+      MAIL_DEFAULT_SENDER: your_email_address
+    command: bash -c "python manage.py db upgrade && python manage.py runserver --host 0.0.0.0 --port 5000"
+    networks:
+      - dev-network
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    command: redis-server
+    networks:
+      - dev-network
+  celery_worker:
+    depends_on:
+      - redis
+    image: mellcap/mailsender:latest
+    command: python manage.py celery_worker
+    networks:
+      - dev-network
+  celery_beat:
+    depends_on:
+      - redis
+    image: mellcap/mailsender:latest
+    command: python manage.py celery_beat
+    networks:
+      - dev-network
+networks:
+  dev-network:
+
