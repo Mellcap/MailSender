@@ -53,3 +53,8 @@ def initial_group_ids(emailEvent_form):
     '''dynamic set selected group_ids'''
     email_groups = EmailGroup.query.all()
     emailEvent_form.email_group_id.choices = [(eg.id, eg.group_name) for eg in email_groups]
+
+@form.route('/get_emails', methods=['GET', 'POST'])
+def form_get_emails():
+    emailEvents = EmailEvent.query.all()
+    return render_template('email_events.html', emailEvents=emailEvents)

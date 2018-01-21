@@ -12,7 +12,7 @@ from app.models.email_group_form import EmailGroupForm
 # form
 # ======
 
-@form.route('/email_groups', methods=['GET', 'POST'])
+@form.route('/save_email_groups', methods=['GET', 'POST'])
 def form_email_groups():
     emailGroup_form = EmailGroupForm()
     if emailGroup_form.validate_on_submit():

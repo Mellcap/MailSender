@@ -12,13 +12,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url_for('form.form_save_emails') }}">MailSender</a>
+            <a class="navbar-brand" href="{{ url_for('home') }}">MailSender</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="{{ url_for('form.form_save_emails') }}">Home</a></li>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
                 <li><a href="{{ url_for('form.form_email_groups') }}">Email Groups</a></li>
-                <li><a href="{{ url_for('form.form_save_emails') }}">Email Events</a></li>
+                <li><a href="{{ url_for('form.form_get_emails') }}">Email Events</a></li>
             </ul>
         </div>
     </div>

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+
+<div class="container">
+    <div class="page-header">
+        <h1 align="center">Email events</h1>
+    </div>
+    <br />
+
+    <!--Add Email Events Button-->
+    <div style="width: 80%">
+    <a class="btn btn-primary pull-right" href="{{ url_for('form.form_save_emails') }}" role="button">
+        + New Email Event
+    </a>
+        </div>
+    <br />
+    <br />
+
+    <!--Email Events Form-->
+
+    <div id="accordion" class="card center-block" style="width: 60%">
+        <div class="card">
+        {% for emailEvent in emailEvents %}
+            <div class="card-header" id="heading{{ emailEvent.id }}">
+              <h5 class="mb-0">
+                <button class="btn btn-info btn-block" data-toggle="collapse" data-target="#collapse{{ emailEvent.id }}" aria-expanded="true" aria-controls="collapse{{ emailEvent.id }}">
+                    {{ emailEvent }} <span class="badge badge-light pull-right">show more</span>
+                  <!--Event Id:{{ emailEvent.id }}, Email Group Id:{{ emailEvent.email_group_id }}, Email Subject:{{ emailEvent.email_subject }}, Timestamp:{{ emailEvent.timestamp }}-->
+                </button>
+              </h5>
+            </div>
+
+            <div id="collapse{{ emailEvent.id }}" class="collapse" aria-labelledby="heading{{ emailEvent.id }}" data-parent="#accordion">
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Event Id: {{ emailEvent.id }}</li>
+                        <li class="list-group-item">Email Group Id: {{ emailEvent.email_group_id }}</li>
+                        <li class="list-group-item">Email Subject: {{ emailEvent.email_subject }}</li>
+                        <li class="list-group-item">Timestamp: {{ emailEvent.timestamp }}</li>
+                        <li class="list-group-item">Email Content: {{ emailEvent.email_content }}</li>
+                      </ul>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</br>
+</br>
+</br>
+</div>
+{% endblock %}
