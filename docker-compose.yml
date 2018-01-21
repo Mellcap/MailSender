@@ -41,7 +41,13 @@ services:
     environment:
       CELERY_BROKER_URL: redis://redis:6379/0
       CELERY_BACKEND_URL: redis://redis:6379/0
-    command: python manage.py celery_worker
+      JUBLIA_CONFIG: production
+      DATABASE_URL: mysql://root:jublia@db:3306/jublia_test
+      # Set your mail config
+      MAIL_USERNAME: your_email_username
+      MAIL_PASSWORD: your_email_password
+      MAIL_DEFAULT_SENDER: your_email_address
+    command: celery worker -A app.celery --loglevel=INFO
     networks:
       - dev-network
   celery_beat:
@@ -51,7 +57,7 @@ services:
     environment:
       CELERY_BROKER_URL: redis://redis:6379/0
       CELERY_BACKEND_URL: redis://redis:6379/0
-    command: python manage.py celery_beat
+    command: celery beat -A app.celery --loglevel=INFO
     networks:
       - dev-network
 networks:
