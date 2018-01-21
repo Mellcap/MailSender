@@ -21,6 +21,8 @@ services:
       JUBLIA_CONFIG: production
       DATABASE_URL: mysql://root:jublia@db:3306/jublia_test
       # Set your mail config
+      MAIL_SERVER: your_email_server
+      MAIL_PORT: your_email_port
       MAIL_USERNAME: your_email_username
       MAIL_PASSWORD: your_email_password
       MAIL_DEFAULT_SENDER: your_email_address
@@ -44,6 +46,8 @@ services:
       JUBLIA_CONFIG: production
       DATABASE_URL: mysql://root:jublia@db:3306/jublia_test
       # Set your mail config
+      MAIL_SERVER: your_email_server
+      MAIL_PORT: your_email_port
       MAIL_USERNAME: your_email_username
       MAIL_PASSWORD: your_email_password
       MAIL_DEFAULT_SENDER: your_email_address

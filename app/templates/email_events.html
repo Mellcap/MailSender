@@ -37,7 +37,8 @@
                         <li class="list-group-item">Event Id: {{ emailEvent.id }}</li>
                         <li class="list-group-item">Email Group Id: {{ emailEvent.email_group_id }}</li>
                         <li class="list-group-item">Email Subject: {{ emailEvent.email_subject }}</li>
-                        <li class="list-group-item">Timestamp: {{ emailEvent.timestamp }}</li>
+                        <li class="list-group-item">Timestamp(UTC): {{ emailEvent.timestamp }}</li>
+                        <li class="list-group-item">Is Send: {{ emailEvent.is_send }}</li>
                         <li class="list-group-item">Email Content: {{ emailEvent.email_content }}</li>
                       </ul>
                 </div>
